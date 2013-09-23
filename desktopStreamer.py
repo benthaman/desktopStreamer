@@ -52,11 +52,10 @@ class AudioRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                     # source should get a sigpipe already, but it looks like
                     # parec ignores it
                     os.kill(sp_source.pid, signal.SIGTERM)
-        except OSError as value:
+        except OSError:
             pass
 
 
 if __name__ == "__main__":
-    server_address = ('', 8081)
     httpd = BaseHTTPServer.HTTPServer(("", 8081), AudioRequestHandler)
     httpd.serve_forever()
